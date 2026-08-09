@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Sayanggg 🤍 — Kado kecil dari aku</title>
+<meta name="description" content="Sebuah kado digital untuk Sayanggg, dari aku.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,600;1,500;1,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Ambient floating hearts, injected further by JS -->
+<div class="floating-hearts" id="floating-hearts" aria-hidden="true"></div>
+
+<!-- Music control -->
+<button id="music-toggle" class="music-toggle" aria-label="Aktifkan atau matikan musik" title="Musik">
+  <span id="music-icon">♪</span>
+</button>
+<audio id="bgm" src="music.mp3" loop preload="none"></audio>
+
+<!-- BLOCKED SCREEN — shown instead of everything if opened on mobile -->
+<section id="scene-blocked" class="scene blocked-scene">
+  <div class="scene-inner blocked-inner">
+    <span class="blocked-icon">💻🤍</span>
+    <p class="eyebrow">khusus untuk Sayanggg</p>
+    <h2 class="section-title">Buka dari laptop yaa saayaanggg </h2>
+    <p class="blocked-text">Kado ini sengaja aku buat cuma bisa dibuka dari <strong>laptop atau komputer</strong>, bukan dari HP yang.</p>
+    <p class="blocked-text">Coba buka lagi link ini nanti kalau kamu udah di depan laptop yaa ayang. Ada kejutan kecil yang nungguin kamu sayang 🤍</p>
+  </div>
+</section>
+
+<main>
+
+  <!-- SCENE 1 — THE GIFT -->
+  <section id="scene-gift" class="scene is-active">
+    <div class="scene-inner gift-inner">
+      <p class="eyebrow">sebuah kado kecil, untuk</p>
+      <h1 class="display-title">Sayanggg</h1>
+      <p class="subtitle">dari aku, di hari spesial kamu 🎂</p>
+
+      <button id="open-gift" class="seal-button" aria-label="Ketuk untuk membuka kado">
+        <span class="seal-circle">
+          <span class="seal-heart">🤍</span>
+        </span>
+        <span class="seal-label">ketuk untuk membuka</span>
+      </button>
+
+      <p class="gift-hint">ada sesuatu yang harus kamu selesaikan dulu di dalam sini xixixi</p>
+    </div>
+  </section>
+
+  <!-- SCENE 2 — THE GAME -->
+  <section id="scene-game" class="scene">
+    <div class="scene-inner game-inner">
+      <p class="eyebrow">satu tantangan kecil</p>
+      <h2 class="section-title">Tangkap Hatinyaa Sayanggg</h2>
+      <p class="game-instruction">Sentuh <strong><span id="target">15</span> hati</strong> sebelum waktu habis, baru kadonya kebuka. semangat sayanggg ✨</p>
+
+      <div class="game-hud">
+        <div class="hud-pill">
+          <span class="hud-label">skor</span>
+          <span class="hud-value"><span id="score">0</span> / <span id="target2">15</span></span>
+        </div>
+        <div class="hud-pill">
+          <span class="hud-label">waktu</span>
+          <span class="hud-value"><span id="timer">30</span>s</span>
+        </div>
+      </div>
+
+      <div id="game-area" class="game-area">
+        <p id="game-start-hint" class="game-start-hint">ketuk di mana saja untuk mulai</p>
+      </div>
+
+      <div id="game-result" class="game-result hidden">
+        <p id="game-result-text"></p>
+        <button id="game-retry" class="ghost-button hidden">coba lagi</button>
+        <button id="game-continue" class="seal-button small hidden">buka pesannya</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 3 — THE LETTER -->
+  <section id="scene-letter" class="scene">
+    <div class="scene-inner letter-inner">
+      <div class="letter-card">
+        <p class="letter-kicker">untuk Ayanggg, hari ini 11 Agustus 2026</p>
+        <h2 class="letter-heading"><em>Selamat Ulang Tahun</em></h2>
+
+        <div class="letter-body">
+          <p>Sayanggg,</p>
+          <p>Di hari yang spesial ini, aku cuma pengen bilang satu hal ke kamu: <strong>Happy Birthday</strong>. Makasih yaa sayang udah sealalu ada, bareng-bareng ngejalanin semuanya, dan bertahan sampai sejauh iniii yang.</p>
+          <p>Aku tahu ngga gampang buat ngejalaninnya yang, apalagi soal pilian kamu buat kuliah di UNS, jauh dari rumah, jauh dari orang tua. Tapiii kamu lihat sendiri kan sekarang yang? Kamu buktiin sendiri kalau pilihan itu bukan sesuatu yang salah. Kamu makin kuat, makin mandiri, dan aku bersyukur bisa lihat perjalanan itu dari dekat taau yaaanggg.</p>
+          <p>Makasih yaa ayang udah percaya, udah tetap semangat walau kadang capek, walau kadang kangen rumah. Setiap langkah kecil kammu itu berarti banget buat akuuu taauu.</p>
+          <p>Di hari ulang tahunmu ini, aku mau titip doa yang tulus: semoga panjang umur, sehat selalu, dimudahkan segala urusan dan kuliahnya, dan semua yang kamu impiin pelan-pelan jadi kenyataan. Semoga aku masih bisa terus jadi orang yang nemenin setiap langkah kamu sekarang, dan nanti nant ya sayang?.</p>
+          <p>Selamat ulang tahun, Sayanggg. Aku sayang kamu, love you 💕.</p>
+        </div>
+
+        <p class="letter-signature">dari, <span class="sig-name">Rafi</span> 🤍</p>
+      </div>
+
+      <button id="go-to-messages" class="ghost-button letter-next-btn">baca ucapan dari teman &amp; keluarga →</button>
+    </div>
+  </section>
+
+  <!-- SCENE 4 — MESSAGES FROM FRIENDS & FAMILY -->
+  <section id="scene-messages" class="scene">
+    <div class="scene-inner messages-inner">
+      <p class="eyebrow">bukan cuma dari aku</p>
+      <h2 class="section-title">Ucapan dari Teman &amp; Keluarga</h2>
+      <p class="messages-sub" id="messages-sub">memuat ucapan...</p>
+
+      <div id="messages-carousel" class="messages-carousel hidden">
+        <button id="msg-prev" class="carousel-arrow carousel-arrow-left" aria-label="Ucapan sebelumnya">‹</button>
+
+        <div class="message-card">
+          <p class="message-text" id="msg-text"></p>
+          <p class="message-author" id="msg-author"></p>
+        </div>
+
+        <button id="msg-next" class="carousel-arrow carousel-arrow-right" aria-label="Ucapan berikutnya">›</button>
+      </div>
+
+      <div class="carousel-dots" id="carousel-dots"></div>
+
+      <div id="messages-empty" class="messages-empty hidden">
+        <p>Belum ada ucapan yang masuk yang. Coba cek lagi nanti yaa sayang 🤍</p>
+      </div>
+
+      <div id="messages-error" class="messages-empty hidden">
+        <p>Ucapan lagi nggak bisa dimuat. Coba muat ulang halamannya ya.</p>
+      </div>
+
+      <button id="msg-refresh" class="ghost-button messages-refresh">muat ulang ucapan</button>
+    </div>
+  </section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
