@@ -587,7 +587,7 @@ a:focus-visible {
   margin: 0 0 18px;
 }
 .secret-text {
-  text-align: left;
+  text-align: center;
   max-width: 480px;
   margin: 0 auto 26px;
 }
