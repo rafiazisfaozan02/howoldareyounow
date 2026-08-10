@@ -1,5 +1,6 @@
 // PASTE the Apps Script "Web app" URL here (see README, bagian "Ucapan dari teman & keluarga").
 // Contoh: 'https://script.google.com/macros/s/XXXXXXXXXXXX/exec'
+
 const MESSAGES_SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbxM0fStQREN8aVqqpJQYnhiisIeX6Q7O8cx6Y1F0nR8j3FtiDnwgS6YPuoO--Clwyn92w/exec';
 
 // ============================================
@@ -44,26 +45,53 @@ pesanInput.addEventListener('input', () => {
   charCountNum.textContent = String(pesanInput.value.length);
 });
 
-function showForm() {
-  form.classList.remove('hidden');
-  successBox.classList.add('hidden');
-  errorBox.classList.add('hidden');
+// ============================================
+// FADE HELPERS — crossfade between form / success / error states
+// ============================================
+const FADE_MS = 350;
+
+function fadeOut(el) {
+  return new Promise((resolve) => {
+    if (el.classList.contains('hidden')) { resolve(); return; }
+    el.classList.add('is-fading-out');
+    setTimeout(() => {
+      el.classList.add('hidden');
+      el.classList.remove('is-fading-out');
+      resolve();
+    }, FADE_MS);
+  });
 }
 
-function showSuccess() {
-  form.classList.add('hidden');
-  successBox.classList.remove('hidden');
-  errorBox.classList.add('hidden');
+function fadeIn(el) {
+  el.classList.remove('hidden');
+  el.classList.add('is-fading-out'); // start transparent
+  void el.offsetWidth;               // force reflow so the transition below actually plays
+  el.classList.remove('is-fading-out'); // transition back to visible
 }
 
-function showError() {
-  errorBox.classList.remove('hidden');
+async function showForm() {
+  await Promise.all([fadeOut(successBox), fadeOut(errorBox)]);
+  fadeIn(form);
+}
+
+async function showSuccess() {
+  await fadeOut(form);
+  await fadeOut(errorBox);
+  fadeIn(successBox);
+}
+
+async function showError() {
+  await fadeOut(errorBox); // in case it was already showing, restart it cleanly
+  fadeIn(errorBox);
 }
 
 function setSubmitting(isSubmitting) {
   submitBtn.disabled = isSubmitting;
   submitLabel.textContent = isSubmitting ? 'mengirim...' : 'kirim ucapan';
 }
+
+// Pop-up-with-fade effect when the page first opens.
+requestAnimationFrame(() => fadeIn(form));
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -95,7 +123,7 @@ form.addEventListener('submit', async (e) => {
 
     if (data.status === 'error') throw new Error(data.message || 'unknown error');
 
-    showSuccess();
+    await showSuccess();
     form.reset();
     charCountNum.textContent = '0';
   } catch (err) {
@@ -107,5 +135,5 @@ form.addEventListener('submit', async (e) => {
 
 sendAnotherBtn.addEventListener('click', showForm);
 tryAgainBtn.addEventListener('click', () => {
-  errorBox.classList.add('hidden');
+  fadeOut(errorBox);
 });

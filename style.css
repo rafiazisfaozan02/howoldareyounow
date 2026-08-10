@@ -240,6 +240,14 @@ a:focus-visible {
 .seal-button.small .seal-circle { width: 72px; height: 72px; }
 .seal-button.small .seal-heart { font-size: 1.5rem; }
 
+#game-continue .seal-circle {
+  border: 4px solid var(--gold);
+  box-shadow:
+    0 12px 30px rgba(180, 151, 232, 0.45),
+    0 0 0 3px rgba(243, 217, 164, 0.35),
+    inset 0 2px 6px rgba(255,255,255,0.35);
+}
+
 .gift-hint {
   margin-top: 40px;
   font-size: 0.85rem;
@@ -318,6 +326,11 @@ a:focus-visible {
   font-weight: 600;
   font-size: 0.95rem;
   pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.6s var(--ease);
+}
+.game-start-hint.is-fading {
+  opacity: 0;
 }
 
 .falling-heart {
@@ -329,9 +342,14 @@ a:focus-visible {
   padding: 6px;
   line-height: 1;
   filter: drop-shadow(0 3px 6px rgba(91,53,96,0.2));
-  transition: transform 0.15s ease;
+  opacity: 1;
+  transition: transform 0.15s ease, opacity 0.5s ease;
 }
 .falling-heart:active { transform: scale(1.3); }
+.falling-heart.is-fading-out {
+  opacity: 0;
+  transform: scale(0.6);
+}
 
 .plus-pop {
   position: absolute;
@@ -602,6 +620,7 @@ a:focus-visible {
   max-width: 480px;
   width: 100%;
   text-align: center;
+  animation: scene-in 0.9s var(--ease);
 }
 
 .submit-sub {
@@ -620,6 +639,9 @@ a:focus-visible {
   flex-direction: column;
   gap: 20px;
   text-align: left;
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
 }
 
 .form-field {
@@ -665,12 +687,20 @@ a:focus-visible {
 .submit-btn { align-self: center; margin-top: 4px; }
 .submit-btn:disabled { opacity: 0.55; pointer-events: none; }
 
+.is-fading-out {
+  opacity: 0;
+  transform: scale(0.96) translateY(10px);
+}
+
 .submit-state {
   margin-top: 26px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
 }
 .submit-state.hidden { display: none; }
 

@@ -155,7 +155,7 @@ function startGame() {
   if (gameActive) return;
   resetGameState();
   gameActive = true;
-  startHint.style.display = 'none';
+  startHint.classList.add('is-fading');
 
   spawnInterval = setInterval(spawnFallingHeart, HEART_SPAWN_MS);
   timerInterval = setInterval(() => {
@@ -205,9 +205,49 @@ function spawnFallingHeart() {
   });
 }
 
+// ============================================
+// CATCH SOUND EFFECT (synthesized, no audio file needed)
+// ============================================
+let audioCtx = null;
+function getAudioCtx() {
+  if (!audioCtx) {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    audioCtx = new AC();
+  }
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+
+function playCatchSound() {
+  try {
+    const ctx = getAudioCtx();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(760, now);
+    osc.frequency.exponentialRampToValueAtTime(1180, now + 0.09);
+
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.22, now + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.3);
+  } catch (err) {
+    // Web Audio not supported/blocked — fail silently, catching still works visually.
+  }
+}
+
 function catchHeart(btn, evt) {
   score += 1;
   scoreEl.textContent = String(score);
+  playCatchSound();
 
   const pop = document.createElement('span');
   pop.className = 'plus-pop';
@@ -229,7 +269,15 @@ function endGame() {
   gameActive = false;
   clearInterval(spawnInterval);
   clearInterval(timerInterval);
-  gameArea.querySelectorAll('.falling-heart').forEach(n => n.remove());
+
+  const remainingHearts = gameArea.querySelectorAll('.falling-heart');
+  remainingHearts.forEach(h => {
+    h.classList.add('is-fading-out');
+    h.style.pointerEvents = 'none';
+  });
+  setTimeout(() => {
+    remainingHearts.forEach(h => h.remove());
+  }, 500);
 
   resultBox.classList.remove('hidden');
   if (gameWon) {
