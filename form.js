@@ -1,7 +1,36 @@
 // PASTE the Apps Script "Web app" URL here (see README, bagian "Ucapan dari teman & keluarga").
 // Contoh: 'https://script.google.com/macros/s/XXXXXXXXXXXX/exec'
 const MESSAGES_SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbxM0fStQREN8aVqqpJQYnhiisIeX6Q7O8cx6Y1F0nR8j3FtiDnwgS6YPuoO--Clwyn92w/exec';
+const bgm = document.getElementById('bgm');
+const musicToggle = document.getElementById('music-toggle');
+const musicIcon = document.getElementById('music-icon');
+let musicStarted = false;
 
+function tryPlayMusic() {
+  if (musicStarted) return;
+  musicStarted = true;
+  bgm.volume = 0.5;
+  const playPromise = bgm.play();
+  if (playPromise && playPromise.catch) {
+    playPromise.then(() => {
+      musicToggle.classList.add('is-playing');
+    }).catch(() => {
+      musicStarted = false;
+      musicToggle.classList.remove('is-playing');
+    });
+  }
+}
+musicToggle.addEventListener('click', () => {
+  if (bgm.paused) {
+    tryPlayMusic();
+    musicToggle.classList.remove('is-muted');
+  } else {
+    bgm.pause();
+    musicToggle.classList.remove('is-playing');
+    musicToggle.classList.add('is-muted');
+  }
+});
+document.addEventListener('click', tryPlayMusic, { once: true });
 // ============================================
 // AMBIENT FLOATING HEARTS (same visual as main site)
 // ============================================

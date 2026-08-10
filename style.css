@@ -497,6 +497,11 @@ a:focus-visible {
    ============================================ */
 .messages-inner { max-width: 620px; }
 
+.messages-inner {
+  max-width: 620px;
+  transition: max-width 0.3s var(--ease);
+}
+
 .messages-sub {
   color: var(--plum-soft);
   margin: 0 0 30px;
@@ -509,6 +514,39 @@ a:focus-visible {
   justify-content: center;
   gap: 14px;
 }
+
+.view-toggle {
+  display: block;
+  margin: 0 auto 26px;
+  font-size: 0.85rem;
+}
+.view-toggle.hidden { display: none; }
+
+.messages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  text-align: left;
+  animation: card-in 0.4s var(--ease);
+}
+.messages-grid.hidden { display: none; }
+
+.messages-grid .message-card {
+  min-height: auto;
+  max-width: none;
+  padding: 22px 20px;
+  gap: 12px;
+  animation: none;
+}
+.messages-grid .message-text {
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+.messages-grid .message-author {
+  font-size: 1.15rem;
+}
+
+.messages-inner.is-grid-view { max-width: 920px; }
 .messages-carousel.hidden { display: none; }
 
 .carousel-arrow {

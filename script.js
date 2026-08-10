@@ -320,6 +320,7 @@ if (goToMessagesBtn) {
 // ============================================
 const messagesSub      = document.getElementById('messages-sub');
 const messagesCarousel = document.getElementById('messages-carousel');
+const messagesGrid     = document.getElementById('messages-grid');
 const messagesEmpty    = document.getElementById('messages-empty');
 const messagesError    = document.getElementById('messages-error');
 const msgText          = document.getElementById('msg-text');
@@ -328,11 +329,14 @@ const msgPrevBtn       = document.getElementById('msg-prev');
 const msgNextBtn       = document.getElementById('msg-next');
 const dotsContainer    = document.getElementById('carousel-dots');
 const refreshBtn       = document.getElementById('msg-refresh');
+const viewToggleBtn    = document.getElementById('view-toggle');
+const messagesInner    = document.querySelector('.messages-inner');
 
 let messages = [];
 let currentMsgIndex = 0;
 let autoAdvanceTimer = null;
 let messagesLoaded = false;
+let isGridView = false;
 
 // Very small CSV parser — handles quoted fields, commas inside quotes, and "" escaped quotes.
 function parseCSV(text) {
@@ -374,6 +378,10 @@ async function loadMessages() {
   if (messagesLoaded) return; // already fetched once this session
 
   messagesSub.textContent = 'memuat ucapan...';
+  isGridView = false;
+  messagesInner.classList.remove('is-grid-view');
+  messagesGrid.classList.add('hidden');
+  dotsContainer.classList.remove('hidden');
   messagesCarousel.classList.add('hidden');
   messagesEmpty.classList.add('hidden');
   messagesError.classList.add('hidden');
@@ -417,6 +425,8 @@ async function loadMessages() {
     }
 
     messagesSub.textContent = `${messages.length} ucapan masuk untukmu 💌`;
+    viewToggleBtn.classList.remove('hidden');
+    viewToggleBtn.textContent = 'lihat semua sekaligus';
     messagesCarousel.classList.remove('hidden');
     buildDots();
     showMessage(0);
@@ -456,6 +466,52 @@ function startAutoAdvance() {
 function restartAutoAdvance() { startAutoAdvance(); }
 
 if (msgPrevBtn) msgPrevBtn.addEventListener('click', () => { showMessage(currentMsgIndex - 1); restartAutoAdvance(); });
+function renderGrid() {
+  messagesGrid.innerHTML = '';
+  messages.forEach((m) => {
+    const card = document.createElement('div');
+    card.className = 'message-card';
+
+    const text = document.createElement('p');
+    text.className = 'message-text';
+    text.textContent = m.text;
+
+    const author = document.createElement('p');
+    author.className = 'message-author';
+    author.textContent = '— ' + m.author;
+
+    card.appendChild(text);
+    card.appendChild(author);
+    messagesGrid.appendChild(card);
+  });
+}
+
+function setGridView(showGrid) {
+  isGridView = showGrid;
+
+  if (showGrid) {
+    clearInterval(autoAdvanceTimer);
+    renderGrid();
+    messagesCarousel.classList.add('hidden');
+    dotsContainer.classList.add('hidden');
+    messagesGrid.classList.remove('hidden');
+    messagesInner.classList.add('is-grid-view');
+    viewToggleBtn.textContent = 'lihat satu-satu';
+  } else {
+    messagesGrid.classList.add('hidden');
+    messagesInner.classList.remove('is-grid-view');
+    messagesCarousel.classList.remove('hidden');
+    dotsContainer.classList.remove('hidden');
+    viewToggleBtn.textContent = 'lihat semua sekaligus';
+    showMessage(currentMsgIndex);
+    startAutoAdvance();
+  }
+}
+
+if (viewToggleBtn) {
+  viewToggleBtn.addEventListener('click', () => setGridView(!isGridView));
+}
+
 if (msgNextBtn) msgNextBtn.addEventListener('click', () => { showMessage(currentMsgIndex + 1); restartAutoAdvance(); });
 
 if (refreshBtn) refreshBtn.addEventListener('click', () => {
