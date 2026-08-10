@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kirim Ucapan untuk Enjii 🤍</title>
+<meta name="description" content="Kirim ucapan ulang tahun untuk Enjii.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,600;1,500;1,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="submit-page-body">
+
+<!-- Ambient floating hearts, same as main site -->
+<div class="floating-hearts" id="floating-hearts" aria-hidden="true"></div>
+
+<main class="submit-main">
+  <div class="scene-inner submit-inner">
+
+    <p class="eyebrow">buat Enjii, dari kamu</p>
+    <h1 class="section-title">Kirim Ucapan Ulang Tahun</h1>
+    <p class="submit-sub">Tulisan kamu bakal muncul di halaman ucapan spesial yang dibuat Rafi buat Enjii. Tulis aja dari hati 🤍</p>
+
+    <form id="submit-form" class="submit-form">
+      <label class="form-field">
+        <span class="form-label">Nama kamu</span>
+        <input type="text" id="field-nama" name="nama" placeholder="Nama kamu" maxlength="60" required>
+      </label>
+
+      <label class="form-field">
+        <span class="form-label">Ucapan buat Enjii</span>
+        <textarea id="field-pesan" name="pesan" rows="6" placeholder="Tulis ucapan ulang tahunmu di sini..." maxlength="600" required></textarea>
+        <span class="char-count"><span id="char-count-num">0</span>/600</span>
+      </label>
+
+      <button type="submit" id="submit-btn" class="seal-button small submit-btn">
+        <span class="seal-circle">
+          <span class="seal-heart">💌</span>
+        </span>
+        <span class="seal-label" id="submit-btn-label">kirim ucapan</span>
+      </button>
+    </form>
+
+    <div id="submit-success" class="submit-state hidden">
+      <p class="submit-state-title">Ucapan kamu udah terkirim 🎉</p>
+      <p class="submit-state-text">Makasih udah luangin waktu buat nulis ini. Enjii bakal baca ucapanmu di hari spesialnya.</p>
+      <button id="send-another" class="ghost-button">kirim ucapan lagi</button>
+    </div>
+
+    <div id="submit-error" class="submit-state hidden">
+      <p class="submit-state-title">Waduh, gagal terkirim</p>
+      <p class="submit-state-text">Coba periksa koneksi internetmu, lalu kirim ulang ya.</p>
+      <button id="try-again" class="ghost-button">coba lagi</button>
+    </div>
+
+  </div>
+</main>
+
+<script src="kirim-ucapan.js"></script>
+</body>
+</html>
