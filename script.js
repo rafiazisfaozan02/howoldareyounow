@@ -10,7 +10,8 @@ const MOBILE_BREAKPOINT = 820; // px — below this width, treat as "phone"
 // PASTE the CSV link from your Google Sheet here (see README, bagian "Ucapan dari teman & keluarga").
 // Contoh: 'https://docs.google.com/spreadsheets/d/XXXXXXXX/gviz/tq?tqx=out:csv&sheet=Form%20Responses%201'
 const MESSAGES_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1Or2RCkF7vNmRz8d9r3m5m73TeLOiYvNsjozd4x_Sit0/gviz/tq?tqx=out:csv&sheet=Sheet1';
-
+const SECRET_USERNAME = 'yuenes';
+const SECRET_PASSWORD = 'messiisgoat'; 
 // ============================================
 // DEVICE GATE — desktop only
 // ============================================
@@ -331,12 +332,20 @@ const dotsContainer    = document.getElementById('carousel-dots');
 const refreshBtn       = document.getElementById('msg-refresh');
 const viewToggleBtn    = document.getElementById('view-toggle');
 const messagesInner    = document.querySelector('.messages-inner');
+const secretMessage    = document.getElementById('secret-message');
+const secretLocked     = document.getElementById('secret-locked');
+const secretUnlockedEl = document.getElementById('secret-unlocked');
+const secretForm       = document.getElementById('secret-unlock-form');
+const secretUsername   = document.getElementById('secret-username');
+const secretPassword   = document.getElementById('secret-password');
+const secretError      = document.getElementById('secret-error');
 
 let messages = [];
 let currentMsgIndex = 0;
 let autoAdvanceTimer = null;
 let messagesLoaded = false;
 let isGridView = false;
+let secretUnlocked = false;
 
 // Very small CSV parser — handles quoted fields, commas inside quotes, and "" escaped quotes.
 function parseCSV(text) {
@@ -495,10 +504,12 @@ function setGridView(showGrid) {
     messagesCarousel.classList.add('hidden');
     dotsContainer.classList.add('hidden');
     messagesGrid.classList.remove('hidden');
+    secretMessage.classList.remove('hidden');
     messagesInner.classList.add('is-grid-view');
     viewToggleBtn.textContent = 'lihat satu-satu';
   } else {
     messagesGrid.classList.add('hidden');
+    secretMessage.classList.add('hidden');
     messagesInner.classList.remove('is-grid-view');
     messagesCarousel.classList.remove('hidden');
     dotsContainer.classList.remove('hidden');
@@ -519,3 +530,27 @@ if (refreshBtn) refreshBtn.addEventListener('click', () => {
   clearInterval(autoAdvanceTimer);
   loadMessages();
 });
+function unlockSecretMessage() {
+  secretUnlocked = true;
+  secretLocked.classList.add('hidden');
+  secretUnlockedEl.classList.remove('hidden');
+}
+
+if (secretForm) {
+  secretForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if (secretUnlocked) return;
+
+    const enteredUser = secretUsername.value.trim().toLowerCase();
+    const enteredPass = secretPassword.value;
+
+    if (enteredUser === SECRET_USERNAME.toLowerCase() && enteredPass === SECRET_PASSWORD) {
+      secretError.classList.add('hidden');
+      unlockSecretMessage();
+    } else {
+      secretError.classList.remove('hidden');
+      secretPassword.value = '';
+    }
+  });
+}

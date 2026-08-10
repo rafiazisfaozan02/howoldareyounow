@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untuk Sayanggg 🤍 Kado kecil dari aku</title>
+<title>Untuk sayang 🤍</title>
 <meta name="description" content="Sebuah kado digital untuk Sayanggg, dari aku.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +16,13 @@
 
 <!-- Ambient floating hearts, injected further by JS -->
 <div class="floating-hearts" id="floating-hearts" aria-hidden="true"></div>
-
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <clipPath id="heartClip" clipPathUnits="objectBoundingBox">
+      <path d="M0.5,0.92 C0.5,0.92 0.05,0.58 0.05,0.32 C0.05,0.12 0.2,0 0.35,0 C0.45,0 0.5,0.09 0.5,0.18 C0.5,0.09 0.55,0 0.65,0 C0.8,0 0.95,0.12 0.95,0.32 C0.95,0.58 0.5,0.92 0.5,0.92 Z"/>
+    </clipPath>
+  </defs>
+</svg>
 <!-- Music control -->
 <button id="music-toggle" class="music-toggle" aria-label="Aktifkan atau matikan musik" title="Musik">
   <span id="music-icon">♪</span>
@@ -27,7 +33,7 @@
 <section id="scene-blocked" class="scene blocked-scene">
   <div class="scene-inner blocked-inner">
     <span class="blocked-icon">💻🤍</span>
-    <p class="eyebrow">khusus untuk Sayanggg</p>
+    <p class="eyebrow">khusus untuk ayang</p>
     <h2 class="section-title">Buka dari laptop yaa saayaanggg </h2>
     <p class="blocked-text">Kado ini sengaja aku buat cuma bisa dibuka dari <strong>laptop atau komputer</strong>, bukan dari HP yang.</p>
     <p class="blocked-text">Coba buka lagi link ini nanti kalau kamu udah di depan laptop yaa ayang. Ada kejutan kecil yang nungguin kamu sayang 🤍</p>
@@ -40,7 +46,7 @@
   <section id="scene-gift" class="scene is-active">
     <div class="scene-inner gift-inner">
       <p class="eyebrow">sebuah kado kecil, untuk</p>
-      <h1 class="display-title">Sayanggg</h1>
+      <h1 class="display-title">Sayang</h1>
       <p class="subtitle">dari aku, di hari spesial kamu 🎂</p>
 
       <button id="open-gift" class="seal-button" aria-label="Ketuk untuk membuka kado">
@@ -58,7 +64,7 @@
   <section id="scene-game" class="scene">
     <div class="scene-inner game-inner">
       <p class="eyebrow">satu tantangan kecil</p>
-      <h2 class="section-title">Tangkap Hatinyaa Sayanggg</h2>
+      <h2 class="section-title">Tangkap Hatinyaa sayang</h2>
       <p class="game-instruction">Sentuh <strong><span id="target">15</span> hati</strong> sebelum waktu habis, baru kadonya kebuka. semangat sayanggg ✨</p>
 
       <div class="game-hud">
@@ -88,22 +94,22 @@
   <section id="scene-letter" class="scene">
     <div class="scene-inner letter-inner">
       <div class="letter-card">
-        <p class="letter-kicker">untuk Ayanggg, hari ini 11 Agustus 2026</p>
+        <p class="letter-kicker">untuk ayang, hari ini 11 Agustus 2026</p>
         <h2 class="letter-heading"><em>Selamat Ulang Tahun</em></h2>
 
         <div class="letter-body">
-          <p>Sayanggg,</p>
-          <p>Di hari yang spesial ini, aku cuma pengen bilang satu hal ke kamu: <strong>Happy Birthday</strong>. Makasih yaa sayang udah sealalu ada, bareng-bareng ngejalanin semuanya, dan bertahan sampai sejauh iniii yang.</p>
+          <p>Sayang,</p>
+          <p>Di hari yang spesial ini, aku cuma pengen bilang satu hal ke kamu <strong>Happy Birthday</strong>. Makasih yaa sayang udah sealalu ada, bareng-bareng ngejalanin semuanya, dan bertahan sampai sejauh iniii yang.</p>
           <p>Aku tahu ngga gampang buat ngejalaninnya yang, apalagi soal pilian kamu buat kuliah di UNS, jauh dari rumah, jauh dari orang tua. Tapiii kamu lihat sendiri sekarang kan yang? Kamu buktiin sendiri kalau pilihan itu bukan sesuatu yang salah. Kamu makin kuat, makin mandiri, dan aku bersyukur bisa lihat perjalanan itu dari dekat taau yaaanggg.</p>
           <p>Makasih yaa ayang udah percaya, udah tetap semangat walau kadang capek, walau kadang kangen rumah. Setiap langkah kecil kammu itu berarti banget buat akuuu taauu.</p>
           <p>Di hari ulang tahunmu ini, aku mau titip doa yang tulus buat kamu yaa sayang. semoga panjang umur, sehat selalu, dimudahkan segala urusan dan kuliahnya, dan semua yang kamu impiin pelan-pelan jadi kenyataannya ya sayang ya? aamiin. Semoga aku masih bisa terus jadi orang yang nemenin setiap langkah kamu sekarang, dan nanti nantii ya sayang?.</p>
           <p>Selamat ulang tahun, Sayanggg. Aku sayang kamu, love you 💕.</p>
         </div>
 
-        <p class="letter-signature">dari, <span class="sig-name">Rafi</span> 🤍</p>
+        <p class="letter-signature">dari,  <span class="sig-name">Rafi</span> 🤍</p>
       </div>
 
-      <button id="go-to-messages" class="ghost-button letter-next-btn">baca ucapan dari teman &amp; keluarga →</button>
+      <button id="go-to-messages" class="ghost-button letter-next-btn">baca ucapan dari orang orang terdekat kamu →</button>
     </div>
   </section>
 
@@ -111,7 +117,7 @@
   <section id="scene-messages" class="scene">
     <div class="scene-inner messages-inner">
       <p class="eyebrow">bukan cuma dari aku</p>
-      <h2 class="section-title">Ucapan dari Teman &amp; Keluarga</h2>
+      <h2 class="section-title">Ucapan dari orang orang terdekat kamu</h2>
       <p class="messages-sub" id="messages-sub">memuat ucapan...</p>
       <button id="view-toggle" class="ghost-button view-toggle hidden">lihat semua sekaligus</button>
       <div id="messages-carousel" class="messages-carousel hidden">
@@ -126,13 +132,47 @@
       </div>
 
       <div class="carousel-dots" id="carousel-dots"></div>
+      <div id="secret-message" class="secret-message hidden">
+
+  <div id="secret-locked" class="secret-locked">
+    <span class="secret-lock-icon">🔒</span>
+    <p class="secret-title">Ada satu pesan rahasia lagi...</p>
+    <p class="secret-hint">Cuma buat ayang yang tau kuncinya 💛</p>
+
+    <form id="secret-unlock-form" class="secret-unlock-form">
+      <input type="text" id="secret-username" class="secret-input" placeholder="username" autocomplete="off" required>
+      <input type="password" id="secret-password" class="secret-input" placeholder="password" autocomplete="off" required>
+      <button type="submit" class="ghost-button secret-unlock-btn">buka pesan rahasia</button>
+    </form>
+    <p id="secret-error" class="secret-error hidden">Username atau password-nya salah, coba lagi yaa ayang.</p>
+  </div>
+
+  <div id="secret-unlocked" class="secret-unlocked hidden">
+    <p class="secret-kicker">psst, ini yang paling spesial</p>
+    <h3 class="secret-heading"><em>Buat ayang, aku ada Sesuatu yang rahasia xixixi</em></h3>
+
+    <div class="secret-text">
+      <p>Seneng kan ayaanggg, banyak orang yg saaayaang saamaa ayaangggg. Kuliah yang bener, belajar yang rajin ya sayang ya? Semua orang di sini mengharapkan yang terbaik buat kaamuu taaauuu. Aakuuu saayaaang baaangeeett taaauuu ssaaamaaa kaaamuuuu taaauuuu. Kita bentar lagi ketemu ya sayang ya?</p>
+      <p>Ini aku bikinin kado digital buat kamu, tapi aku juga ada kado yang nyata buat kamu sayang. Aku mau kasih kamu kado ini pas kita ketemu nanti yaa sayanggg. Semoga kamu suka yaa ayanggg 🤍</p>
+    </div>
+    <div class="secret-photos">
+      <img class="heart-photo" src="photos/foto1.jpg" alt="">
+      <img class="heart-photo" src="photos/foto2.jpg" alt="">
+      <img class="heart-photo" src="photos/foto3.jpg" alt="">
+      <img class="heart-photo" src="photos/foto4.jpg" alt="">
+      <img class="heart-photo" src="photos/foto5.jpg" alt="">
+      <img class="heart-photo" src="photos/foto6.jpg" alt="">
+    </div>
+  </div>
+
+</div>
       <div id="messages-grid" class="messages-grid hidden"></div>
       <div id="messages-empty" class="messages-empty hidden">
         <p>Belum ada ucapan yang masuk yang. Coba cek lagi nanti yaa sayang 🤍</p>
       </div>
 
       <div id="messages-error" class="messages-empty hidden">
-        <p>Ucapan lagi nggak bisa dimuat. Coba muat ulang halamannya ya.</p>
+        <p>Ucapan lagi nggak bisa dimuat. Coba muat ulang halamannya yaa ayang.</p>
       </div>
 
       <button id="msg-refresh" class="ghost-button messages-refresh">muat ulang ucapan</button>

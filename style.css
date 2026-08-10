@@ -502,6 +502,123 @@ a:focus-visible {
   transition: max-width 0.3s var(--ease);
 }
 
+.secret-message {
+  position: relative;
+  margin: 0 0 26px;
+  padding: 34px 28px;
+  border-radius: 26px;
+  background: linear-gradient(155deg, rgba(255,255,255,0.85), rgba(243,217,164,0.25));
+  border: 2px solid var(--gold);
+  box-shadow: 0 20px 50px rgba(91, 53, 96, 0.18);
+  text-align: center;
+  animation: secret-glow 3.2s ease-in-out infinite;
+}
+.secret-message.hidden { display: none; }
+
+@keyframes secret-glow {
+  0%, 100% { box-shadow: 0 20px 50px rgba(91, 53, 96, 0.18), 0 0 0 rgba(243,217,164,0); }
+  50%      { box-shadow: 0 20px 50px rgba(91, 53, 96, 0.18), 0 0 34px rgba(243,217,164,0.55); }
+}
+
+.secret-lock-icon { display: block; font-size: 2rem; margin-bottom: 8px; }
+
+.secret-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--plum);
+  margin: 0 0 4px;
+}
+.secret-hint {
+  color: var(--plum-soft);
+  font-size: 0.9rem;
+  margin: 0 0 20px;
+}
+
+.secret-unlock-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.secret-input {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(180, 151, 232, 0.4);
+  background: var(--paper);
+  color: var(--plum);
+  width: 160px;
+}
+.secret-input:focus {
+  outline: none;
+  border-color: var(--hotpink);
+  box-shadow: 0 0 0 4px rgba(255, 111, 160, 0.15);
+}
+.secret-unlock-btn { font-size: 0.85rem; }
+
+.secret-error {
+  color: var(--hotpink);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 14px 0 0;
+}
+.secret-error.hidden { display: none; }
+
+.secret-unlocked.hidden { display: none; }
+.secret-unlocked { animation: unfold 0.8s var(--ease); }
+
+.secret-kicker {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hotpink);
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+.secret-heading {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(1.3rem, 4vw, 1.7rem);
+  color: var(--plum);
+  margin: 0 0 18px;
+}
+.secret-text {
+  text-align: left;
+  max-width: 480px;
+  margin: 0 auto 26px;
+}
+.secret-text p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--plum);
+  margin: 0 0 14px;
+}
+
+.secret-photos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+.heart-photo {
+  width: 110px;
+  height: 100px;
+  object-fit: cover;
+  clip-path: url(#heartClip);
+  box-shadow: 0 6px 16px rgba(91, 53, 96, 0.25);
+  transition: transform 0.3s var(--ease);
+  background: var(--blush);
+}
+.heart-photo:hover { transform: scale(1.08) rotate(-2deg); }
+.heart-photo:nth-child(even) { transform: rotate(3deg); }
+.heart-photo:nth-child(even):hover { transform: scale(1.08) rotate(3deg); }
+.heart-photo:nth-child(3n) { transform: rotate(-4deg); }
+.heart-photo:nth-child(3n):hover { transform: scale(1.08) rotate(-4deg); }
+
 .messages-sub {
   color: var(--plum-soft);
   margin: 0 0 30px;
