@@ -1,6 +1,6 @@
 // PASTE the Apps Script "Web app" URL here (see README, bagian "Ucapan dari teman & keluarga").
 // Contoh: 'https://script.google.com/macros/s/XXXXXXXXXXXX/exec'
-const MESSAGES_SUBMIT_URL = '';
+const MESSAGES_SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbxM0fStQREN8aVqqpJQYnhiisIeX6Q7O8cx6Y1F0nR8j3FtiDnwgS6YPuoO--Clwyn92w/exec';
 
 // ============================================
 // AMBIENT FLOATING HEARTS (same visual as main site)
