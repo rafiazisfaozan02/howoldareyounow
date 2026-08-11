@@ -387,6 +387,23 @@ a:focus-visible {
 .ghost-button:hover { background: rgba(180,151,232,0.15); transform: translateY(-2px); }
 .hidden { display: none !important; }
 
+.continue-btn {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 12px 34px;
+  border-radius: 999px;
+  background: var(--hotpink);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: 1.5px solid var(--hotpink);
+  transition: transform 0.25s var(--ease), background 0.25s var(--ease);
+}
+.continue-btn:hover {
+  background: #FF4D8F;
+  transform: translateY(-2px);
+}
+
 /* ============================================
    SCENE 3 — LETTER
    ============================================ */
