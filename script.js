@@ -45,7 +45,7 @@ function spawnAmbientHeart() {
   heart.style.left = left + 'vw';
   heart.style.animationDuration = duration + 's';
   heart.style.setProperty('--drift', drift);
-  heart.style.fontSize = (1 + Math.random() * 1.2) + 'rem';
+  heart.style.fontSize = (1 + Math.random() * 3) + 'rem';
   container.appendChild(heart);
   setTimeout(() => heart.remove(), duration * 1000 + 500);
 }
