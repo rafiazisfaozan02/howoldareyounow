@@ -2,7 +2,7 @@
 // CONFIG
 // ============================================
 const GAME_DURATION = 35;   // seconds
-const TARGET_SCORE  = 25;   // hearts needed to unlock the letter
+const TARGET_SCORE  = 35;   // hearts needed to unlock the letter
 const HEART_SPAWN_MS = 550; // ms between spawns
 const HEART_EMOJIS = ['💗', '💖', '💜', '❤️'];
 const HEART_EMOJIS_BACKGROUND = ['💗'];
