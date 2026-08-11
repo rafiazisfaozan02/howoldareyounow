@@ -34,7 +34,7 @@ document.addEventListener('click', tryPlayMusic, { once: true });
 // ============================================
 // AMBIENT FLOATING HEARTS (same visual as main site)
 // ============================================
-const HEART_EMOJIS = ['💗', '💖', '💕', '💜', '❤️'];
+const HEART_EMOJIS = ['💗'];
 
 function spawnAmbientHeart() {
   const container = document.getElementById('floating-hearts');
@@ -48,12 +48,12 @@ function spawnAmbientHeart() {
   heart.style.left = left + 'vw';
   heart.style.animationDuration = duration + 's';
   heart.style.setProperty('--drift', drift);
-  heart.style.fontSize = (1 + Math.random() * 1.2) + 'rem';
+  heart.style.fontSize = (1 + Math.random() * 4) + 'rem';
   container.appendChild(heart);
   setTimeout(() => heart.remove(), duration * 1000 + 500);
 }
-setInterval(spawnAmbientHeart, 900);
-for (let i = 0; i < 6; i++) setTimeout(spawnAmbientHeart, i * 300);
+setInterval(spawnAmbientHeart, 350);
+for (let i = 0; i < 25; i++) setTimeout(spawnAmbientHeart, i * 300);
 
 // ============================================
 // FORM

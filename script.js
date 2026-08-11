@@ -4,7 +4,7 @@
 const GAME_DURATION = 30;   // seconds
 const TARGET_SCORE  = 15;   // hearts needed to unlock the letter
 const HEART_SPAWN_MS = 550; // ms between spawns
-const HEART_EMOJIS = ['💗', '💖', '💕', '💜', '❤️'];
+const HEART_EMOJIS = ['💗', '💖', '💜', '❤️'];
 const HEART_EMOJIS_BACKGROUND = ['💗'];
 const MOBILE_BREAKPOINT = 820; // px — below this width, treat as "phone"
 
@@ -45,13 +45,13 @@ function spawnAmbientHeart() {
   heart.style.left = left + 'vw';
   heart.style.animationDuration = duration + 's';
   heart.style.setProperty('--drift', drift);
-  heart.style.fontSize = (1 + Math.random() * 3) + 'rem';
+  heart.style.fontSize = (1 + Math.random() * 4) + 'rem';
   container.appendChild(heart);
   setTimeout(() => heart.remove(), duration * 1000 + 500);
 }
 if (!isBlocked) {
-  setInterval(spawnAmbientHeart, 900);
-  for (let i = 0; i < 6; i++) setTimeout(spawnAmbientHeart, i * 300);
+  setInterval(spawnAmbientHeart, 350);
+  for (let i = 0; i < 25; i++) setTimeout(spawnAmbientHeart, i * 300);
 }
 
 // ============================================
@@ -178,7 +178,7 @@ function spawnFallingHeart() {
   btn.setAttribute('aria-label', 'Tangkap hati');
   btn.textContent = HEART_EMOJIS[Math.floor(Math.random() * HEART_EMOJIS.length)];
 
-  const size = 1.4 + Math.random() * 1.2; // rem
+  const size = 2.5; // rem
   btn.style.fontSize = size + 'rem';
 
   const startX = Math.random() * Math.max(areaWidth - 50, 10);
