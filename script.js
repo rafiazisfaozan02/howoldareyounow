@@ -10,8 +10,8 @@ const MOBILE_BREAKPOINT = 820; // px — below this width, treat as "phone"
 // PASTE the CSV link from your Google Sheet here (see README, bagian "Ucapan dari teman & keluarga").
 // Contoh: 'https://docs.google.com/spreadsheets/d/XXXXXXXX/gviz/tq?tqx=out:csv&sheet=Form%20Responses%201'
 const MESSAGES_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1Or2RCkF7vNmRz8d9r3m5m73TeLOiYvNsjozd4x_Sit0/gviz/tq?tqx=out:csv&sheet=Sheet1';
-const SECRET_USERNAME = 'yuenes';
-const SECRET_PASSWORD = 'messiisgoat'; 
+const SECRET_USERNAME = 'kamu';
+const SECRET_PASSWORD = 'minapadi'; 
 // ============================================
 // DEVICE GATE — desktop only
 // ============================================
