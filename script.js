@@ -5,6 +5,7 @@ const GAME_DURATION = 30;   // seconds
 const TARGET_SCORE  = 15;   // hearts needed to unlock the letter
 const HEART_SPAWN_MS = 550; // ms between spawns
 const HEART_EMOJIS = ['💗', '💖', '💕', '💜', '❤️'];
+const HEART_EMOJIS_BACKGROUND = ['💗'];
 const MOBILE_BREAKPOINT = 820; // px — below this width, treat as "phone"
 
 // PASTE the CSV link from your Google Sheet here (see README, bagian "Ucapan dari teman & keluarga").
@@ -22,7 +23,7 @@ function isMobileDevice() {
   return uaIsMobile || narrowScreen;
 }
 
-const isBlocked = isMobileDevice();
+const isBlocked = false;
 if (isBlocked) {
   document.getElementById('scene-gift').classList.remove('is-active');
   document.getElementById('scene-blocked').classList.add('is-active');
@@ -37,7 +38,7 @@ function spawnAmbientHeart() {
   if (!container) return;
   const heart = document.createElement('span');
   heart.className = 'amb-heart';
-  heart.textContent = HEART_EMOJIS[Math.floor(Math.random() * HEART_EMOJIS.length)];
+  heart.textContent = HEART_EMOJIS_BACKGROUND[Math.floor(Math.random() * HEART_EMOJIS_BACKGROUND.length)];
   const left = Math.random() * 100;
   const duration = 9 + Math.random() * 8;
   const drift = (Math.random() * 80 - 40) + 'px';
