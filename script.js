@@ -4,6 +4,7 @@ const HEART_SPAWN_MS = 550;
 const HEART_EMOJIS = ['💗', '💖', '💜', '❤️'];
 const HEART_EMOJIS_BACKGROUND = ['💗'];
 const MOBILE_BREAKPOINT = 820;
+const SKIP_GAME_PASSWORD = 'yuenes';
 const MESSAGES_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1Or2RCkF7vNmRz8d9r3m5m73TeLOiYvNsjozd4x_Sit0/gviz/tq?tqx=out:csv&sheet=Sheet1';
 const SECRET_USERNAME = 'kamu';
 const SECRET_PASSWORD = 'minapadi'; 
@@ -586,5 +587,31 @@ if (secretPhotoTrigger && secretVoice) {
   secretPhotoTrigger.addEventListener('click', () => {
     secretVoice.currentTime = 0;
     secretVoice.play().catch(() => {});
+  });
+}
+// ============================================
+// SKIP GAME (buat testing) — tombol rahasia + password
+// ============================================
+const skipGameBtn = document.getElementById('skip-game-btn');
+
+function cheatSkipGame() {
+  if (!gameActive && score === 0 && resultBox.classList.contains('hidden')) {
+    startGame();
+  }
+  score = TARGET_SCORE;
+  scoreEl.textContent = String(score);
+  gameWon = true;
+  endGame();
+}
+
+if (skipGameBtn) {
+  skipGameBtn.addEventListener('click', () => {
+    const entered = prompt('Masukin kode rahasia:');
+    if (entered === null) return; // user klik Cancel
+    if (entered === SKIP_GAME_PASSWORD) {
+      cheatSkipGame();
+    } else {
+      alert('Kode salah.');
+    }
   });
 }

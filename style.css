@@ -269,8 +269,22 @@ a:focus-visible {
 /* ============================================
    SCENE 2 — GAME
    ============================================ */
-.game-inner { max-width: 520px; }
-
+.game-inner { 
+  max-width: 520px; 
+  position: relative;
+}
+.skip-game-trigger {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 30px;
+  height: 30px;
+  opacity: 0;
+  background: transparent;
+  border: none;
+  padding: 0;
+  z-index: 5;
+}
 .game-instruction {
   color: var(--plum-soft);
   margin: 0 0 22px;
