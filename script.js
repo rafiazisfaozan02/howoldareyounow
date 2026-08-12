@@ -116,7 +116,7 @@ document.getElementById('open-gift').addEventListener('click', () => {
 // SCENE 2 : CATCH THE HEARTS GAME
 // ============================================
 const gameArea      = document.getElementById('game-area');
-const startHin      = document.getElementById('game-start-hint');
+const startHint     = document.getElementById('game-start-hint');
 const scoreEl       = document.getElementById('score');
 const timerEl       = document.getElementById('timer');
 const targetEls     = [document.getElementById('target'), document.getElementById('target2')];
