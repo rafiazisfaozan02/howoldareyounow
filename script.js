@@ -594,38 +594,56 @@ if (secretPhotoTrigger && secretVoice) {
   });
 }
 // ============================================
-// SKIP GAME (buat testing) — tombol rahasia + password
+// CHEAT MODAL
 // ============================================
-const skipGameBtn = document.getElementById('skip-game-btn');
+const skipGameBtn      = document.getElementById('skip-game-btn');
+const cheatModal       = document.getElementById('cheat-modal');
+const cheatModalForm   = document.getElementById('cheat-modal-form');
+const cheatModalInput  = document.getElementById('cheat-modal-input');
+const cheatModalError  = document.getElementById('cheat-modal-error');
+const cheatModalCancel = document.getElementById('cheat-modal-cancel');
+
+function openCheatModal() {
+  cheatModalError.classList.add('hidden');
+  cheatModalInput.value = '';
+  cheatModal.classList.remove('hidden');
+  setTimeout(() => cheatModalInput.focus(), 50);
+}
+
+function closeCheatModal() {
+  cheatModal.classList.add('hidden');
+}
 
 function cheatSkipGame() {
   if (!gameActive && score === 0 && resultBox.classList.contains('hidden')) {
     startGame();
   }
   score = TARGET_SCORE;
-  scoreEl.textContent = String(score);
   gameWon = true;
   endGame();
 }
 
-if (skipGameBtn) {
-  skipGameBtn.addEventListener('click', () => {
-    const entered = prompt('Masukin kode rahasia:');
-    if (entered === null) return; // user klik Cancel
-    if (entered === SKIP_GAME_PASSWORD) {
+if (cheatModalForm) {
+  cheatModalForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (cheatModalInput.value === SKIP_GAME_PASSWORD) {
+      closeCheatModal();
       cheatSkipGame();
     } else {
-      alert('Kode salah.');
+      cheatModalError.classList.remove('hidden');
+      cheatModalInput.value = '';
     }
   });
 }
-// ============================================
-// TAWARAN CHEAT PAS GAGAL
-// ============================================
+
+if (cheatModalCancel) {
+  cheatModalCancel.addEventListener('click', closeCheatModal);
+}
+
+if (skipGameBtn) {
+  skipGameBtn.addEventListener('click', openCheatModal);
+}
+
 if (cheatBtn) {
-  cheatBtn.addEventListener('click', () => {
-    score = TARGET_SCORE;
-    gameWon = true;
-    endGame();
-  });
+  cheatBtn.addEventListener('click', openCheatModal);
 }

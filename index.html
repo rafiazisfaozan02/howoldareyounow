@@ -180,7 +180,20 @@
   </section>
 
 </main>
-
+<div id="cheat-modal" class="cheat-modal hidden">
+  <div class="cheat-modal-card">
+    <p class="cheat-modal-title">Masukin kode rahasia</p>
+    <p class="cheat-modal-sub">Siang siang minum es</p>
+    <form id="cheat-modal-form">
+      <input type="password" id="cheat-modal-input" class="secret-input" placeholder="password" autocomplete="off">
+      <div class="cheat-modal-actions">
+        <button type="button" id="cheat-modal-cancel" class="ghost-button">batal</button>
+        <button type="submit" class="ghost-button">buka</button>
+      </div>
+    </form>
+    <p id="cheat-modal-error" class="secret-error hidden">Kode-nya salah, coba lagi ya.</p>
+  </div>
+</div>
 <script src="script.js"></script>
 </body>
 </html>

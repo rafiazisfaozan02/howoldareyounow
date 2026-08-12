@@ -931,3 +931,49 @@ a:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
+.cheat-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(91, 53, 96, 0.35);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+.cheat-modal.hidden { display: none; }
+
+.cheat-modal-card {
+  background: var(--paper);
+  border-radius: 22px;
+  padding: 30px 26px;
+  max-width: 320px;
+  width: calc(100% - 40px);
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(91, 53, 96, 0.3);
+  animation: unfold 0.35s var(--ease);
+}
+.cheat-modal-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--plum);
+  margin: 0 0 4px;
+}
+.cheat-modal-sub {
+  font-size: 0.88rem;
+  color: var(--plum-soft);
+  margin: 0 0 18px;
+}
+#cheat-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+#cheat-modal-input { width: 100%; }
+.cheat-modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
