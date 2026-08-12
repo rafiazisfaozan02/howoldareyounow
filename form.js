@@ -1,5 +1,3 @@
-// PASTE the Apps Script "Web app" URL here (see README, bagian "Ucapan dari teman & keluarga").
-// Contoh: 'https://script.google.com/macros/s/XXXXXXXXXXXX/exec'
 const MESSAGES_SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbxM0fStQREN8aVqqpJQYnhiisIeX6Q7O8cx6Y1F0nR8j3FtiDnwgS6YPuoO--Clwyn92w/exec';
 const bgm = document.getElementById('bgm');
 const musicToggle = document.getElementById('music-toggle');
@@ -32,7 +30,7 @@ musicToggle.addEventListener('click', () => {
 });
 document.addEventListener('click', tryPlayMusic, { once: true });
 // ============================================
-// AMBIENT FLOATING HEARTS (same visual as main site)
+// AMBIENT FLOATING HEARTS
 // ============================================
 const HEART_EMOJIS = ['💗'];
 
@@ -74,7 +72,7 @@ pesanInput.addEventListener('input', () => {
 });
 
 // ============================================
-// FADE HELPERS — crossfade between form / success / error states
+// FADE HELPERS 
 // ============================================
 const FADE_MS = 350;
 
@@ -92,9 +90,9 @@ function fadeOut(el) {
 
 function fadeIn(el) {
   el.classList.remove('hidden');
-  el.classList.add('is-fading-out'); // start transparent
-  void el.offsetWidth;               // force reflow so the transition below actually plays
-  el.classList.remove('is-fading-out'); // transition back to visible
+  el.classList.add('is-fading-out'); 
+  void el.offsetWidth;               
+  el.classList.remove('is-fading-out');
 }
 
 async function showForm() {
@@ -109,7 +107,7 @@ async function showSuccess() {
 }
 
 async function showError() {
-  await fadeOut(errorBox); // in case it was already showing, restart it cleanly
+  await fadeOut(errorBox);
   fadeIn(errorBox);
 }
 
@@ -117,8 +115,6 @@ function setSubmitting(isSubmitting) {
   submitBtn.disabled = isSubmitting;
   submitLabel.textContent = isSubmitting ? 'mengirim...' : 'kirim ucapan';
 }
-
-// Pop-up-with-fade effect when the page first opens.
 requestAnimationFrame(() => fadeIn(form));
 
 form.addEventListener('submit', async (e) => {
@@ -129,7 +125,6 @@ form.addEventListener('submit', async (e) => {
   if (!nama || !pesan) return;
 
   if (!MESSAGES_SUBMIT_URL) {
-    // Not configured yet — tell the site owner, not the guest, what's wrong.
     alert('Fitur kirim ucapan belum di-setup pemilik web ini (MESSAGES_SUBMIT_URL kosong di kirim-ucapan.js).');
     return;
   }
@@ -138,8 +133,6 @@ form.addEventListener('submit', async (e) => {
   errorBox.classList.add('hidden');
 
   try {
-    // text/plain content-type avoids a CORS preflight that Apps Script can't handle,
-    // so we can read the actual JSON response back.
     const res = await fetch(MESSAGES_SUBMIT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },

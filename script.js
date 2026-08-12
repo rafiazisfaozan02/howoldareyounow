@@ -1,15 +1,9 @@
-// ============================================
-// CONFIG
-// ============================================
-const GAME_DURATION = 35;   // seconds
-const TARGET_SCORE  = 35;   // hearts needed to unlock the letter
-const HEART_SPAWN_MS = 550; // ms between spawns
+const GAME_DURATION = 35;   
+const TARGET_SCORE  = 35;   
+const HEART_SPAWN_MS = 550;
 const HEART_EMOJIS = ['💗', '💖', '💜', '❤️'];
 const HEART_EMOJIS_BACKGROUND = ['💗'];
-const MOBILE_BREAKPOINT = 820; // px — below this width, treat as "phone"
-
-// PASTE the CSV link from your Google Sheet here (see README, bagian "Ucapan dari teman & keluarga").
-// Contoh: 'https://docs.google.com/spreadsheets/d/XXXXXXXX/gviz/tq?tqx=out:csv&sheet=Form%20Responses%201'
+const MOBILE_BREAKPOINT = 820;
 const MESSAGES_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1Or2RCkF7vNmRz8d9r3m5m73TeLOiYvNsjozd4x_Sit0/gviz/tq?tqx=out:csv&sheet=Sheet1';
 const SECRET_USERNAME = 'kamu';
 const SECRET_PASSWORD = 'minapadi'; 
@@ -19,7 +13,6 @@ const SECRET_PASSWORD = 'minapadi';
 function isMobileDevice() {
   const uaIsMobile = /Android|iPhone|iPad|iPod|Windows Phone|Mobi/i.test(navigator.userAgent);
   const narrowScreen = window.innerWidth < MOBILE_BREAKPOINT;
-  // Treat as mobile if the user agent says so, or the viewport is phone/tablet-sized.
   return uaIsMobile || narrowScreen;
 }
 
@@ -51,7 +44,7 @@ function spawnAmbientHeart() {
 }
 if (!isBlocked) {
   setInterval(spawnAmbientHeart, 350);
-  for (let i = 0; i < 25; i++) setTimeout(spawnAmbientHeart, i * 300);
+  for (let i = 0; i < 20; i++) setTimeout(spawnAmbientHeart, i * 300);
 }
 
 // ============================================
@@ -88,7 +81,6 @@ function tryPlayMusic() {
       musicToggle.classList.add('is-playing');
       musicIcon.textContent = '♪';
     }).catch(() => {
-      // Autoplay blocked or file missing — let the user start it manually.
       musicStarted = false;
       musicToggle.classList.remove('is-playing');
     });
@@ -178,13 +170,13 @@ function spawnFallingHeart() {
   btn.setAttribute('aria-label', 'Tangkap hati');
   btn.textContent = HEART_EMOJIS[Math.floor(Math.random() * HEART_EMOJIS.length)];
 
-  const size = 2.5; // rem
+  const size = 2.5;
   btn.style.fontSize = size + 'rem';
 
   const startX = Math.random() * Math.max(areaWidth - 50, 10);
   btn.style.left = startX + 'px';
 
-  const fallDuration = 3200 + Math.random() * 2200; // ms
+  const fallDuration = 3200 + Math.random() * 2200;
   gameArea.appendChild(btn);
 
   const startTime = performance.now();
@@ -242,7 +234,7 @@ function playCatchSound() {
     osc.start(now);
     osc.stop(now + 0.3);
   } catch (err) {
-    // Web Audio not supported/blocked — fail silently, catching still works visually.
+    
   }
 }
 
@@ -348,7 +340,7 @@ let messagesLoaded = false;
 let isGridView = false;
 let secretUnlocked = false;
 
-// Very small CSV parser — handles quoted fields, commas inside quotes, and "" escaped quotes.
+// Very small CSV parser
 function parseCSV(text) {
   const rows = [];
   let row = [];
@@ -385,7 +377,7 @@ function findColumn(headers, candidates) {
 }
 
 async function loadMessages() {
-  if (messagesLoaded) return; // already fetched once this session
+  if (messagesLoaded) return; 
 
   messagesSub.textContent = 'memuat ucapan...';
   isGridView = false;
@@ -478,6 +470,16 @@ function restartAutoAdvance() { startAutoAdvance(); }
 if (msgPrevBtn) msgPrevBtn.addEventListener('click', () => { showMessage(currentMsgIndex - 1); restartAutoAdvance(); });
 function renderGrid() {
   messagesGrid.innerHTML = '';
+   const rafiParagraphs = document.querySelectorAll('#scene-letter .letter-body p');
+  const rafiText = [...rafiParagraphs].map(p => p.textContent.trim()).join('\n\n');
+
+  const rafiCard = document.createElement('div');
+  rafiCard.className = 'message-card message-card-rafi';
+  rafiCard.innerHTML = `
+    <p class="message-text">${rafiText}</p>
+    <p class="message-author">— Rafi</p>
+  `;
+  messagesGrid.appendChild(rafiCard);
   messages.forEach((m) => {
     const card = document.createElement('div');
     card.className = 'message-card';
@@ -553,5 +555,36 @@ if (secretForm) {
       secretError.classList.remove('hidden');
       secretPassword.value = '';
     }
+  });
+}
+// ============================================
+// TOMBOL RAHASIA DI FOTO — putar suara ucapan
+// ============================================
+const secretVoice = document.getElementById('secret-voice');
+const secretPhotoTrigger = document.getElementById('secret-photo-trigger');
+let bgmVolumeBeforeDuck = null;
+
+function duckMusic() {
+  if (!bgm) return;
+  bgmVolumeBeforeDuck = bgm.volume;
+  bgm.volume = Math.min(bgm.volume, 0.12);
+}
+
+function restoreMusicVolume() {
+  if (!bgm || bgmVolumeBeforeDuck === null) return;
+  bgm.volume = bgmVolumeBeforeDuck;
+  bgmVolumeBeforeDuck = null;
+}
+
+if (secretVoice) {
+  secretVoice.addEventListener('play', duckMusic);
+  secretVoice.addEventListener('ended', restoreMusicVolume);
+  secretVoice.addEventListener('pause', restoreMusicVolume);
+}
+
+if (secretPhotoTrigger && secretVoice) {
+  secretPhotoTrigger.addEventListener('click', () => {
+    secretVoice.currentTime = 0;
+    secretVoice.play().catch(() => {});
   });
 }

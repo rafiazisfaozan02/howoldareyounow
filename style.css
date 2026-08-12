@@ -663,6 +663,16 @@ a:focus-visible {
   text-align: left;
   animation: card-in 0.4s var(--ease);
 }
+.message-card-rafi {
+  grid-column: 1 / -1;
+  border: 2px solid var(--hotpink);
+  background: linear-gradient(155deg, rgba(255,255,255,0.9), rgba(255,217,232,0.3));
+}
+.message-card-rafi .message-author { color: var(--hotpink); }
+
+#secret-photo-trigger {
+  cursor: pointer;
+}
 .messages-grid.hidden { display: none; }
 
 .messages-grid .message-card {
