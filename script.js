@@ -116,14 +116,15 @@ document.getElementById('open-gift').addEventListener('click', () => {
 // SCENE 2 : CATCH THE HEARTS GAME
 // ============================================
 const gameArea      = document.getElementById('game-area');
-const startHint      = document.getElementById('game-start-hint');
-const scoreEl        = document.getElementById('score');
-const timerEl        = document.getElementById('timer');
-const targetEls      = [document.getElementById('target'), document.getElementById('target2')];
-const resultBox       = document.getElementById('game-result');
-const resultText       = document.getElementById('game-result-text');
-const retryBtn         = document.getElementById('game-retry');
-const continueBtn      = document.getElementById('game-continue');
+const startHin      = document.getElementById('game-start-hint');
+const scoreEl       = document.getElementById('score');
+const timerEl       = document.getElementById('timer');
+const targetEls     = [document.getElementById('target'), document.getElementById('target2')];
+const resultBox     = document.getElementById('game-result');
+const resultText    = document.getElementById('game-result-text');
+const retryBtn      = document.getElementById('game-retry');
+const cheatBtn      = document.getElementById('game-cheat'); 
+const continueBtn   = document.getElementById('game-continue');
 
 targetEls.forEach(el => { if (el) el.textContent = TARGET_SCORE; });
 
@@ -143,6 +144,7 @@ function resetGameState() {
   resultBox.classList.add('hidden');
   retryBtn.classList.add('hidden');
   continueBtn.classList.add('hidden');
+  cheatBtn.classList.add('hidden'); 
   gameArea.querySelectorAll('.falling-heart, .plus-pop').forEach(n => n.remove());
 }
 
@@ -279,10 +281,12 @@ function endGame() {
     resultText.textContent = `Yeay! ${score} hati tertangkap 💗 kadonya siap dibuka.`;
     continueBtn.classList.remove('hidden');
     retryBtn.classList.add('hidden');
+    cheatBtn.classList.add('hidden');
   } else {
-    resultText.textContent = `Waktu habis, baru ${score} dari ${TARGET_SCORE} hati. Coba sekali lagi ya?`;
+    resultText.textContent = `Yaahh waktu habis, baru ${score} dari ${TARGET_SCORE} hati. Coba sekali lagi ya ayang? semangat ayang`;
     retryBtn.classList.remove('hidden');
     continueBtn.classList.add('hidden');
+    cheatBtn.classList.remove('hidden');
   }
 }
 
@@ -613,5 +617,15 @@ if (skipGameBtn) {
     } else {
       alert('Kode salah.');
     }
+  });
+}
+// ============================================
+// TAWARAN CHEAT PAS GAGAL
+// ============================================
+if (cheatBtn) {
+  cheatBtn.addEventListener('click', () => {
+    score = TARGET_SCORE;
+    gameWon = true;
+    endGame();
   });
 }
