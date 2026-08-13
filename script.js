@@ -563,7 +563,7 @@ if (secretForm) {
   });
 }
 // ============================================
-// TOMBOL RAHASIA DI FOTO — putar suara ucapan
+// TOMBOL RAHASIA DI FOTO 
 // ============================================
 const secretVoice = document.getElementById('secret-voice');
 const secretPhotoTrigger = document.getElementById('secret-photo-trigger');
