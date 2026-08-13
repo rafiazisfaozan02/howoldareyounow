@@ -565,9 +565,12 @@ if (secretForm) {
 // ============================================
 // TOMBOL RAHASIA DI FOTO 
 // ============================================
+const voiceModal      = document.getElementById('voice-modal');
+const voiceModalClose = document.getElementById('voice-modal-close');
 const secretVoice = document.getElementById('secret-voice');
 const secretPhotoTrigger = document.getElementById('secret-photo-trigger');
 let bgmVolumeBeforeDuck = null;
+let voicePending = false;
 
 function duckMusic() {
   if (!bgm) return;
@@ -586,11 +589,24 @@ if (secretVoice) {
   secretVoice.addEventListener('ended', restoreMusicVolume);
   secretVoice.addEventListener('pause', restoreMusicVolume);
 }
-
 if (secretPhotoTrigger && secretVoice) {
   secretPhotoTrigger.addEventListener('click', () => {
-    secretVoice.currentTime = 0;
-    secretVoice.play().catch(() => {});
+    if (voicePending) return;
+    voicePending = true;
+
+    voiceModal.classList.remove('hidden');
+
+    setTimeout(() => {
+      secretVoice.currentTime = 0;
+      secretVoice.play().catch(() => {});
+      voicePending = false;
+    }, 2000);
+  });
+}
+
+if (voiceModalClose) {
+  voiceModalClose.addEventListener('click', () => {
+    voiceModal.classList.add('hidden');
   });
 }
 // ============================================
